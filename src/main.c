@@ -4,17 +4,14 @@
 
 #include "tile.h"
 #include "color.h"
-
-#define ESCAPE_KEY 27
-#define UP_KEY     'k'
-#define DOWN_KEY   'j'
-#define LEFT_KEY   'h'
-#define RIGHT_KEY  'l'
+#include "player.h"
+#include "controls.h"
 
 #define MAP_SIZE_X 40
 #define MAP_SIZE_Y 20
 
 char *map[MAP_SIZE_X][MAP_SIZE_Y];
+Player player;
 
 WINDOW *window;
 
@@ -39,11 +36,17 @@ void draw_map() {
 
   refresh();
 }
+void draw_player() {
+  color_set(WHITE, NULL);
+  mvaddstr(player.y_pos, player.x_pos, PLAYER_CHAR);
+  refresh();
+}
 void draw_status() {}
 void draw_inventory() {}
 
 void draw() {
   draw_map();
+  draw_player();
   draw_status();
   draw_inventory();
 }
@@ -51,12 +54,9 @@ void draw() {
 // -- game / graphics logic functions -- //
 
 void handle_keypress(char key) {
-  // movement
-  int key_code = key;
-  if (key_code == UP_KEY   || key_code == DOWN_KEY ||
-      key_code == LEFT_KEY || key_code == RIGHT_KEY) {
-    // do movement
-  }
+  move_player(key, &player);
+  // (if it isn't a movement key,
+  //  this will just do nothing)
 }
 
 void loop(char key) {
@@ -86,6 +86,12 @@ int main() {
   noecho(); // do not show characters when they've been typed
 
   generate_map();
+  player = (Player) {
+    .x_pos = 5,
+    .y_pos = 5,
+    .inventory = { (Item) { "", 0 } }
+  };
+
   loop(' ');
 
   char key = ' ';
