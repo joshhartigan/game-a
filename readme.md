@@ -1,7 +1,7 @@
 game-a Readme
 =============
 
-Introduction
+introduction
 ------------
 game-a is a terminal-based game written in C using
 the `curses` library. It is inspired by
@@ -12,6 +12,13 @@ It started out as
 [semicircle/code/c/game.c](https://github.com/joshhartigan/semicircle/blob/master/code/c/game.c),
 which grew out of hand since all the code was scruffily written in one file.
 Now, the code will be scruffily written in multiple files!
+
+todo list
+---------
+* grow trees
+* make trees choppable
+* inventory support
+* create status text
 
 **License**
 
