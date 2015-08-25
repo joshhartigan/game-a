@@ -7,6 +7,8 @@
 #define LOW_TREE_ID  4
 #define HI_TREE_ID   11
 
+#define TREE_PROBABILITY 2
+
 char *tile_names[TILE_COUNT];
 char *tile_glyphs[TILE_COUNT];
 

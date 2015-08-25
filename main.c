@@ -1,14 +1,13 @@
 #include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-#include "tile.h"
 #include "color.h"
-#include "player.h"
+#include "constants.h"
 #include "controls.h"
-
-#define MAP_SIZE_X 40
-#define MAP_SIZE_Y 20
+#include "player.h"
+#include "tile.h"
 
 char *map[MAP_SIZE_X][MAP_SIZE_Y];
 Player player;
@@ -18,8 +17,19 @@ WINDOW *window;
 void generate_map() {
   for (int x = 0; x < MAP_SIZE_X; x++) {
     for (int y = 0; y < MAP_SIZE_Y; y++) {
-      map[x][y] =
-        tile_glyphs[rand() % HI_GRASS_ID] + LOW_GRASS_ID;
+      int chance = (rand() % 100) + 1;
+
+      if (chance < TREE_PROBABILITY) {
+        map[x][y] =
+          tile_glyphs[(rand() % (HI_TREE_ID - LOW_TREE_ID)) + LOW_TREE_ID];
+      }
+
+      // else if (OTHER PROBABILITIES ETC)
+
+      else {
+        map[x][y] =
+          tile_glyphs[(rand() % (HI_GRASS_ID - LOW_GRASS_ID)) + LOW_GRASS_ID];
+      }
     }
   }
 }
@@ -71,6 +81,8 @@ void quit(WINDOW *window) {
 }
 
 int main() {
+  srand(time(NULL));
+
   window = initscr();
 
   if (window == NULL) {

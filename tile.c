@@ -39,6 +39,7 @@ char *tile_glyphs[] = {
   "Y"
 };
 
+/*
 char *glyph_from_name(char *name) {
   for (int i = 0; i < TILE_COUNT; i++) {
     if (strcmp(tile_names[i], name) == 0) {
@@ -58,6 +59,7 @@ char *name_from_glyph(char *glyph) {
 
   return "ERROR! Unrecognised glyph.";
 }
+*/
 
 bool glyph_is_valid(char *str, int LOW_ID, int HI_ID) {
   for (int i = LOW_ID; i < HI_ID; i++) {
