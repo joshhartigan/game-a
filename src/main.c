@@ -5,7 +5,11 @@
 #include "tile.h"
 #include "color.h"
 
-#define KEY_ESCAPE 27
+#define ESCAPE_KEY 27
+#define UP_KEY     'k'
+#define DOWN_KEY   'j'
+#define LEFT_KEY   'h'
+#define RIGHT_KEY  'l'
 
 #define MAP_SIZE_X 40
 #define MAP_SIZE_Y 20
@@ -49,8 +53,8 @@ void draw() {
 void handle_keypress(char key) {
   // movement
   int key_code = key;
-  if (key_code == KEY_UP   || key_code == KEY_DOWN ||
-      key_code == KEY_LEFT || key_code == KEY_RIGHT) {
+  if (key_code == UP_KEY   || key_code == DOWN_KEY ||
+      key_code == LEFT_KEY || key_code == RIGHT_KEY) {
     // do movement
   }
 }
@@ -85,7 +89,7 @@ int main() {
   loop(' ');
 
   char key = ' ';
-  while (key != KEY_ESCAPE) {
+  while (key != ESCAPE_KEY) {
     key = getch();
     loop(key);
   }
