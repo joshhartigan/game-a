@@ -24,6 +24,11 @@ void generate_map() {
           tile_glyphs[(rand() % (HI_TREE_ID - LOW_TREE_ID)) + LOW_TREE_ID];
       }
 
+      else if (chance < POND_PROBABILITY) {
+        map[x][y] =
+          tile_glyphs[POND_ID];
+      }
+
       // else if (OTHER PROBABILITIES ETC)
 
       else {
@@ -46,12 +51,29 @@ void draw_map() {
 
   refresh();
 }
+
 void draw_player() {
   color_set(WHITE, NULL);
   mvaddstr(player.y_pos, player.x_pos, PLAYER_CHAR);
   refresh();
 }
-void draw_status() {}
+
+void draw_status() {
+  int min_y = MAP_SIZE_Y + 1;
+
+  // clear the line (to prevent overlapping previous text)
+  move(min_y, 0);
+  clrtoeol();
+
+  char status_text[MAP_SIZE_X];
+  char *floor_name = name_from_glyph(map[player.x_pos][player.y_pos]);
+  sprintf(status_text, "You are standing on %s.", floor_name);
+
+  color_set(WHITE, NULL);
+  mvaddstr(min_y, 0, status_text);
+  refresh();
+}
+
 void draw_inventory() {}
 
 void draw() {
@@ -104,9 +126,9 @@ int main() {
     .inventory = { (Item) { "", 0 } }
   };
 
-  loop(' ');
+  loop('\0');
 
-  char key = ' ';
+  char key = '\0';
   while (key != ESCAPE_KEY) {
     key = getch();
     loop(key);

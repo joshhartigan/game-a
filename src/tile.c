@@ -19,7 +19,9 @@ char *tile_names[] = {
   "an old maple tree",
   "a dying pear tree",
   "a pecan tree",
-  "a willow tree"
+  "a willow tree",
+  // pond: [4]
+  "a pond",
 };
 
 char *tile_glyphs[] = {
@@ -36,7 +38,9 @@ char *tile_glyphs[] = {
   "Y",
   "y",
   "y",
-  "Y"
+  "Y",
+  // pond: [4]
+  "o",
 };
 
 /*
@@ -49,6 +53,7 @@ char *glyph_from_name(char *name) {
 
   return "?";
 }
+*/
 
 char *name_from_glyph(char *glyph) {
   for (int i = 0; i < TILE_COUNT; i++) {
@@ -59,11 +64,14 @@ char *name_from_glyph(char *glyph) {
 
   return "ERROR! Unrecognised glyph.";
 }
-*/
 
-bool glyph_is_valid(char *str, int LOW_ID, int HI_ID) {
+bool glyph_is_id(char *glyph, int ID) {
+  return strcmp(glyph, tile_glyphs[ID]) == 0;
+}
+
+bool glyph_is_valid(char *glyph, int LOW_ID, int HI_ID) {
   for (int i = LOW_ID; i < HI_ID; i++) {
-    if (strcmp(str, tile_glyphs[i]) == 0) {
+    if (strcmp(glyph, tile_glyphs[i]) == 0) {
       return true;
     }
   }
@@ -72,6 +80,10 @@ bool glyph_is_valid(char *str, int LOW_ID, int HI_ID) {
 }
 
 int get_glyph_color(char *glyph) {
+  if (glyph_is_id(glyph, POND_ID)) {
+    return BLUE;
+  }
+
   if (glyph_is_valid(glyph, LOW_TREE_ID, HI_TREE_ID)) {
     return YELLOW;
   }

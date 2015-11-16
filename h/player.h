@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #define FULL_INVENTORY 64
 #define PLAYER_CHAR "@"
 
@@ -13,3 +16,5 @@ typedef struct {
 } Player;
 
 void move_player(char key, Player *player);
+
+#endif
