@@ -3,16 +3,17 @@
 
 #include <stdbool.h>
 
-#define TILE_COUNT 13
+#define TILE_COUNT 14
 
 #define LOW_GRASS_ID  0
 #define HI_GRASS_ID   3
 #define LOW_TREE_ID   4
 #define HI_TREE_ID   11
-#define POND_ID      12
+#define LOW_PUDDLE_ID  12
+#define HI_PUDDLE_ID   13
 
 #define TREE_PROBABILITY 2
-#define POND_PROBABILITY 3
+#define PUDDLE_PROBABILITY 3
 
 char *tile_names[TILE_COUNT];
 char *tile_glyphs[TILE_COUNT];

@@ -17,4 +17,7 @@ typedef struct {
 
 void move_player(char key, Player *player);
 
+int get_inventory_index(char *name);
+int next_free_inventory_slot();
+
 #endif

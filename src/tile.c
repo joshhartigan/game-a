@@ -6,12 +6,12 @@
 #include "color.h"
 
 char *tile_names[] = {
-  // grasses: [0] -> [3]
+  // grasses
   "wheatgrass",
   "bluegrass",
   "ryegrass",
   "dead grass",
-  // trees: [4] -> [11]
+  // trees
   "an apple tree",
   "a birch tree",
   "an oak tree",
@@ -20,17 +20,18 @@ char *tile_names[] = {
   "a dying pear tree",
   "a pecan tree",
   "a willow tree",
-  // pond: [4]
-  "a pond",
+  // puddle
+  "a puddle",
+  "a drained puddle",
 };
 
 char *tile_glyphs[] = {
-  // grasses: [0] -> [3]
+  // grasses
   ".",
   "`",
   "'",
   "\"",
-  // trees: [4] -> [11]
+  // trees
   "y",
   "y",
   "Y",
@@ -39,8 +40,9 @@ char *tile_glyphs[] = {
   "y",
   "y",
   "Y",
-  // pond: [4]
+  // puddle
   "o",
+  "x",
 };
 
 /*
@@ -62,11 +64,7 @@ char *name_from_glyph(char *glyph) {
     }
   }
 
-  return "ERROR! Unrecognised glyph.";
-}
-
-bool glyph_is_id(char *glyph, int ID) {
-  return strcmp(glyph, tile_glyphs[ID]) == 0;
+  return "ERROR! Unrecognised glyph";
 }
 
 bool glyph_is_valid(char *glyph, int LOW_ID, int HI_ID) {
@@ -80,7 +78,7 @@ bool glyph_is_valid(char *glyph, int LOW_ID, int HI_ID) {
 }
 
 int get_glyph_color(char *glyph) {
-  if (glyph_is_id(glyph, POND_ID)) {
+  if (glyph_is_valid(glyph, LOW_PUDDLE_ID, HI_PUDDLE_ID + 1)) {
     return BLUE;
   }
 

@@ -7,4 +7,7 @@
 #define LEFT_KEY   'h'
 #define RIGHT_KEY  'l'
 
+#define MOVEMENT_KEYS "hjkl"
+#define DRAIN_KEYS "d"
+
 #endif
